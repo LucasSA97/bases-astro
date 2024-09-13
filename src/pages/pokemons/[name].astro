@@ -1,0 +1,66 @@
+---
+import type { GetStaticPaths } from "astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+import PokemonCard from "../../components/PokemonCard.astro";
+import type { PokemonListResponse } from "../../interfaces/pokemon-list.interface";
+
+export const getStaticPaths = ( async () => {
+
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
+    const { results } = await res.json() as PokemonListResponse
+    
+    return results.map( ({name, url} )=> ({
+        params: {name: name},
+        props: { url: url, name: name }
+    }))
+        
+    // return [
+    //         {
+    //             params: { name: 'bulbasaur' }, 
+    //             props: { name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/' }
+    //         },
+    //         {
+    //             params: { name: 'charmander' }, 
+    //             props: { name: 'charmander', url: 'https://pokeapi.co/api/v2/pokemon/4/' } 
+    //         },
+    // ];
+}) satisfies GetStaticPaths;
+
+const { url } = Astro.props
+const { name } = Astro.params
+
+const id = url.split('/').at(-2)
+
+const audioSrc = `url`
+const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+
+---
+
+<MainLayout 
+    title={`Pokemon: ${name}`}
+    description={`Informacion sobre el pokemon ${name}`}
+    image={imgUrl}
+>
+    <section class="mt-10 mx-10 flex flex-col justify-center items-center">
+        <div>
+            <a href="/">Regresar</a>
+            <h1 class="text-4xl capitalize">{name}</h1>
+        </div>
+        <PokemonCard 
+            name={name}
+            url={url}
+            isBig
+        />
+
+        <audio controls class="mt-5">
+            <source src={audioSrc} type="audio/ogg">
+            No carga el audio
+        </audio>
+    </section>
+</MainLayout>
+
+<style>
+    a {
+        @apply hover:underline capitalize text-blue-400
+    }
+</style>
