@@ -1,4 +1,6 @@
 ---
+
+import NavBar from '@components/shared/navBar.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { siteInfo } from 'src/consts/site-info';
 
@@ -34,8 +36,9 @@ const { title = siteInfo.title, image, description = siteInfo.description } = As
 			}
 		  </style> -->
 	</head>
-	<body class="bg-slate-800 m-auto max-w-3xl text-slate-100">
-        <main class="mt-10 ">
+	<body class="bg-slate-800  text-slate-100">
+		<NavBar />
+        <main class="mt-10 m-auto max-w-3xl">
             <slot />
         </main>
     </body>
