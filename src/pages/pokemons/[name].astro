@@ -51,7 +51,7 @@ const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites
                 class="text-blue-500 ">Regresar</button>
                 <h1 class="text-4xl capitalize">{name}</h1>
             </div>
-            <button id="btn-favorite" class="ml-4">
+            <button data-name={name} data-id={id} id="btn-favorite" class="ml-4">
                 <Icon color={'red'} size={50} name='heart-outline'/>
                 <Icon class="hidden" color={'red'} size={50} name='heart-full'/>
             </button>
@@ -69,6 +69,33 @@ const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites
         </audio>
     </section>
 </MainLayout>
+
+<script>
+
+    interface FavoritePokemon {
+        name: string,
+        id: number
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        
+        const btnFavorite = document.querySelector('#btn-favorite') as HTMLButtonElement
+
+        if(!btnFavorite) return
+
+        const namePokemon   = btnFavorite?.dataset.name
+        const idPokemon     = btnFavorite?.dataset.id
+    
+        btnFavorite.addEventListener('click', () => {
+    
+        })
+    })
+
+
+
+
+
+</script>
 
 <style>
     a {
