@@ -52,8 +52,8 @@ const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites
                 <h1 class="text-4xl capitalize">{name}</h1>
             </div>
             <button data-name={name} data-id={id} id="btn-favorite" class="ml-4">
-                <Icon color={'red'} size={50} name='heart-outline'/>
-                <Icon class="hidden" color={'red'} size={50} name='heart-full'/>
+                <Icon data-outline color={'red'} size={50} name='heart-outline'/>
+                <Icon data-full class="hidden" color={'red'} size={50} name='heart-full'/>
             </button>
 
         </div>
@@ -77,18 +77,65 @@ const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites
         id: number
     }
 
-    document.addEventListener('astro:page-load', () => {
-        
+    // document.addEventListener('astro:page-load', () => {
+    //     console.log('Hola load')
+    // })
+
+    // document.addEventListener('astro:before-preparation', () => {
+    //     console.log('Hola before preparation')
+    // })
+
+    // document.addEventListener('astro:after-preparation', () => {
+    //     console.log('Hola after preparation')
+    // })
+
+    // document.addEventListener('astro:after-swap', () => {
+    //     console.log('Hola after swap')
+    // })
+    // document.addEventListener('astro:before-swap', () => {
+    //     console.log('Hola before swap')
+    // })
+
+    const handlePageLoad = () => {
+
+        let favoritePokemons: FavoritePokemon [] = JSON.parse(localStorage.getItem('favorites') ?? '[]')
+
         const btnFavorite = document.querySelector('#btn-favorite') as HTMLButtonElement
 
         if(!btnFavorite) return
 
-        const namePokemon   = btnFavorite?.dataset.name
-        const idPokemon     = btnFavorite?.dataset.id
-    
+        const namePokemon   = btnFavorite?.dataset.name ?? ''
+        const idPokemon     = btnFavorite?.dataset.id ?? ''
+
+        const heartOutline = btnFavorite.querySelector('[data-outline]') as HTMLElement
+        const heartFull = btnFavorite.querySelector('[data-full]') as HTMLElement
+
+        const toggleFavorite = () => {
+            const isFavorite = favoritePokemons.some(pokemon => pokemon.name === namePokemon)
+
+            if(isFavorite) {
+                favoritePokemons = favoritePokemons.filter(pokemon => pokemon.name !== namePokemon)
+        } else {
+            favoritePokemons.push({name: namePokemon, id: +idPokemon})
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favoritePokemons))
+
         btnFavorite.addEventListener('click', () => {
-    
+            heartOutline.classList.toggle('hidden')
+            heartFull.classList.toggle('hidden')
+
+            toggleFavorite()
         })
+
+        btnFavorite.addEventListener('astro:page-load',handlePageLoad)    
+
+    }
+
+    
+    document.addEventListener('astro:page-load', () => {
+        
+        
     })
 
 
