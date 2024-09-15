@@ -36,9 +36,9 @@ const { title = siteInfo.title, image, description = siteInfo.description } = As
 			}
 		  </style> -->
 	</head>
-	<body class="bg-slate-800  text-slate-100">
+	<body class="bg-slate-800  text-slate-100 flex flex-col min-h-screen">
 		<NavBar />
-        <main class="mt-10 m-auto max-w-3xl  my-10">
+        <main class="mt-10 mx-auto flex-grow w-full max-w-3xl px-4">
             <slot />
         </main>
     </body>

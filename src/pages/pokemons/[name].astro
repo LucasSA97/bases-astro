@@ -106,9 +106,16 @@ const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites
 
         const namePokemon   = btnFavorite?.dataset.name ?? ''
         const idPokemon     = btnFavorite?.dataset.id ?? ''
+        const isFavorite = favoritePokemons.some(pokemon => pokemon.name === namePokemon)
 
         const heartOutline = btnFavorite.querySelector('[data-outline]') as HTMLElement
         const heartFull = btnFavorite.querySelector('[data-full]') as HTMLElement
+
+            if(isFavorite) {
+                heartOutline.classList.add('hidden')
+                heartFull.classList.remove('hidden')
+            }
+        
 
         const toggleFavorite = () => {
             const isFavorite = favoritePokemons.some(pokemon => pokemon.name === namePokemon)
@@ -132,15 +139,8 @@ const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites
 
     }
 
+}
     
-    document.addEventListener('astro:page-load', () => {
-        
-        
-    })
-
-
-
-
 
 </script>
 
