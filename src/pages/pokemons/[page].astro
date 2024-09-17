@@ -2,8 +2,9 @@
 import type { GetStaticPaths } from "astro";
 import MainLayout	 from "../../layouts/MainLayout.astro";
 import type {PokemonListResponse} from "../../interfaces/pokemon-list.interface"
-import PokemonCard from "../../components/PokemonCard.astro";
+import PokemonCard from "../../components/pokemons/PokemonCard.astro";
 import Title from "@components/shared/Title.astro";
+import { Counter } from "@components/Counter";
 
 
 export const getStaticPaths = (async({paginate}) => {
@@ -56,6 +57,14 @@ href={page.url.prev}>Anterior</a>
 		]
 	} href={page.url.next}>Siguiente</a>
 	<span class="text-xl font-semibold">Pagina {page.currentPage}</span>
+	</section>
+
+	<section>
+		<Counter 
+		transition:persist="counter"
+		transition:persist-props
+		client:load
+		/>
 	</section>
 	
 </MainLayout>

@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import type {PokemonListResponse} from "../interfaces/pokemon-list.interface"
-import PokemonCard from "../components/PokemonCard.astro";
+import PokemonCard from "../components/pokemons/PokemonCard.astro";
 import Title from "@components/shared/Title.astro";
 
 const res = await fetch('https://pokeapi.co/api/v2/pokemon')
