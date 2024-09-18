@@ -1,4 +1,4 @@
 export const siteInfo = {
-    title: 'Pokemon',
-    description: 'Descubre todos los pokemones'
- }
+  title: 'Pokémon Static',
+  description: 'A static site with Pokémon data',
+};

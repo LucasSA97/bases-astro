@@ -6,20 +6,11 @@
       "@components/*": [
         "./src/components/*"
       ],
-      "@pages/*": [
-        "./src/pages/*"
-      ],
-      "@layouts*": [
-        "./src/layouts/*"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
       "@interfaces/*": [
         "./src/interfaces/*"
+      ],
+      "@layouts/*": [
+        "./src/layouts/*"
       ]
     },
     "jsx": "preserve",

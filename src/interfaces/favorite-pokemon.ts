@@ -1,4 +1,4 @@
 export interface FavoritePokemon {
-    id: number,
-    name: string
+  id: number;
+  name: string;
 }
